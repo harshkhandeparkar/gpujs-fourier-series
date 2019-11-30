@@ -1,101 +1,4 @@
-const canvas = document.getElementById('main-canvas');
-const gpu = new GPU({
-  canvas,
-  mode: 'gpu'
-})
-
-let dim = 1000,
-  centerX = dim / 2,
-  centerY = dim / 2,
-  bg = 0,
-  color = 1,
-  speed = 0.001,
-  doRender = false,
-  rendersPerFrame = 20,
-  pi = Math.PI,
-  pointSize = 0.2,
-  coordScaleFactor = 20;
-
-document.getElementById('speed').value = speed;
-document.getElementById('rend-per-frame').value = rendersPerFrame;
-document.getElementById('pt-size').value = pointSize;
-document.getElementById('coord-scale-factor').value = coordScaleFactor;
-
 const scaleCoords = coord => Math.floor(coord * coordScaleFactor) / coordScaleFactor;
-
-const render = gpu.createKernel(function (x, y, pixels, coordScaleFactor, pointSize) {
-  let out = pixels[this.thread.y][this.thread.x]; // default color: background
-
-  if (
-    Math.abs(x - (this.thread.x - this.constants.centerX) / coordScaleFactor) < pointSize &&
-    Math.abs(y - (this.thread.y - this.constants.centerY) / coordScaleFactor) < pointSize
-  ) out = this.constants.color;
-
-  return out;
-},
-  {
-    output: [dim, dim],
-    pipeline: true,
-    constants: {
-      dim,
-      centerX,
-      centerY,
-      color
-    }
-  }
-)
-
-const blankGraph = gpu.createKernel(function() { // Create the starting blank graph with axes
-  if ( // Coordinate Axes
-    this.thread.x == this.constants.centerX ||
-    this.thread.y == this.constants.centerY
-  ) return 0.5;
-  else return this.constants.bg;
-},
-{
-  output: [dim, dim],
-  pipeline: true,
-  constants: {
-    centerX,
-    centerY,
-    bg
-  }
-})
-
-const getTex = gpu.createKernel(function(tex) { // get a separate texture so that source and destination textures should not match
-  return tex[this.thread.y][this.thread.x];
-},
-{
-  output: [dim, dim],
-  pipeline: true
-})
-
-const display = gpu.createKernel(function(pixels) { // Display the pixels on the canvas
-  const color = pixels[this.thread.y][this.thread.x];
-  this.color(color, color, color);
-},
-{
-  output: [dim, dim],
-  graphical: true
-})
-
-// complex nos with -ve time periods(clockwise) starting with -1, -2....
-let clistnegative = [
-  new Complex(2.0, pi),
-  new Complex(4.5, 0),
-  new Complex(2.5, pi/2),
-  new Complex(0, pi),
-  new Complex(1.5, 0)
-]
-
-// complex nos 1with non-negative time periods(anti-clockwise) staring with 0, 1, 2...
-let clist = [
-  new Complex(1.0, 0),
-  new Complex(0.0, 0),
-  new Complex(4.5, 0),
-  new Complex(5.0, pi/2),
-  new Complex(5.5, 0)
-]
 
 let renders = 0; // renders count
 let frames = 0; // frame count
@@ -126,17 +29,10 @@ const doDraw = () => {
 
 document.getElementById('start-stop').onclick = e => {
   e.preventDefault();
-  
-  if (doRender) {
-    doRender = false;
-    e.target.innerText = 'Start';
-    document.getElementById('change').disabled = false;
-  }
-  else {
-    doRender = true;
-    e.target.innerText = 'Stop';
-    document.getElementById('change').disabled = true;
-  }
+
+  doRender = !doRender;
+  e.target.innerText = e.target.innerText === 'Start' ? 'Stop' : 'Start';
+  document.getElementById('change').disabled = !document.getElementById('change').disabled;
 }
 
 document.getElementById('restart').onclick = e => {
@@ -158,6 +54,17 @@ document.getElementById('change').onclick = e => {
   coordScaleFactor = document.getElementById('coord-scale-factor').value;
 }
 
+document.getElementById('blank').onclick = e => {
+  e.preventDefault();
+
+  doRender = false;
+  document.getElementById('start-stop').innerText = 'Start';
+  document.getElementById('change').disabled = false;
+  renderPixelsTex = blankGraph();
+  display(renderPixelsTex);
+}
+
+display(renderPixelsTex);
 window.requestAnimationFrame(doDraw);
 
 setInterval(() => {
