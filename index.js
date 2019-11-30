@@ -7,6 +7,17 @@ let renderPixelsTex = blankGraph(); // initial black graph rendered pixels textu
 const doDraw = () => {
   if(doRender) {
     for (let i = 0; i < rendersPerFrame; i++) {
+      // complexes = positiveTimePeriodMult(getTex(complexes), speed);
+      // complexesNegative = negativeTimePeriodMult(getTex(complexesNegative), speed);
+
+
+      // const finalComplex = getFinalComplex(complexes, complexesNegative);
+      // console.log('+ve', complexes.toArray())
+      // console.log('-ve', complexesNegative.toArray())
+      // console.log('final', finalComplex.toArray())
+
+      // renderPixelsTex = render(finalComplex, getTex(renderPixelsTex), coordScaleFactor, pointSize);
+
       const res = new Complex(0, 0); // resultant
 
       clist.forEach(c => res.add(c)) // Add the nos to the resultant
@@ -14,10 +25,12 @@ const doDraw = () => {
 
       renders++; // count the rendered frame
 
-      renderPixelsTex = render(res.x, res.y, getTex(renderPixelsTex), coordScaleFactor, pointSize);
+      renderPixelsTex = render([res.x, res.y], getTex(renderPixelsTex), coordScaleFactor, pointSize);
 
       clist.forEach((c, i) => c.multiply(new Complex(1, i * speed))) // next rotation step
       clistnegative.forEach((c, i) => c.multiply(new Complex(1, -(i + 1) * speed)))
+
+      renders++;
     }
     display(renderPixelsTex);
     frames++;
@@ -75,7 +88,9 @@ setInterval(() => {
   rendersPerFrame: ${rendersPerFrame} <br>
   dimensions: ${dim} x ${dim} <br>
   coordScaleFactor: ${coordScaleFactor} <br>
-  pointSize: ${pointSize}
+  pointSize: ${pointSize} <br>
+  AntiClockwise Nos: ${clist.length - 1} <br>
+  Clockwise Nos: ${clistnegative.length}
 `;
   frames = 0;
   renders = 0;

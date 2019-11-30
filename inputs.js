@@ -9,7 +9,7 @@ let dim = 1000, // dimensions
   centerY = dim / 2,
   bg = 0, // backgroundColor: 0 to 1(greyscale)
   color = 1, // color of the point: 0 to 1(greyscale)
-  speed = 0.001, // Angle Step in radians
+  speed = 0.01, // Angle Step in radians
   doRender = false,
   rendersPerFrame = 20,
   pi = Math.PI,
@@ -44,3 +44,9 @@ let clist = [
   new Complex(1.8, pi/2),
   new Complex(1.2, pi/2)
 ]
+
+// let complexes = [],
+//   complexesNegative = [[0, 0]];
+
+// clist.forEach(c => complexes.push([c.x, c.y, c.theta]));
+// clistnegative.forEach(c => complexesNegative.push([c.x, c.y, c.theta]));
