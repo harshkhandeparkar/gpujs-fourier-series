@@ -1,6 +1,6 @@
 const scaleCoords = coord => Math.floor(coord * coordScaleFactor) / coordScaleFactor;
 
-let renders = 0; // renders count
+let renders = 0; // renders countc
 let frames = 0; // frame count
 let renderPixelsTex = blankGraph(); // initial black graph rendered pixels texture
 

@@ -24,18 +24,23 @@ document.getElementById('coord-scale-factor').value = coordScaleFactor;
 
 // complex nos with -ve time periods(clockwise) starting with -1, -2....
 let clistnegative = [
-  new Complex(2.0, pi),
-  new Complex(4.5, 0),
-  new Complex(2.5, pi),
-  new Complex(0.0, pi),
-  new Complex(1.5, 0)
+  new Complex(5, pi/2),
+  new Complex(1.5, pi/2),
+  new Complex(1.2, pi/2),
+  new Complex(2.0, pi/2),
+  new Complex(1.0, pi/2),
+  new Complex(2.1, pi/2),
+  new Complex(1.1, pi/2)
 ]
 
 // complex nos 1with non-negative time periods(anti-clockwise) staring with 0, 1, 2...
 let clist = [
-  new Complex(1.0, 0),
-  new Complex(0.0, 0),
-  new Complex(4.5, 0),
-  new Complex(5.0, pi),
-  new Complex(5.5, 0)
+  new Complex(2, -pi/2),
+  new Complex(7, pi/2),
+  new Complex(0.5, pi/2),
+  new Complex(0.5, pi/2),
+  new Complex(0.3, pi/2),
+  new Complex(1.3, pi/2),
+  new Complex(1.8, pi/2),
+  new Complex(1.2, pi/2)
 ]
