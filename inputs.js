@@ -9,7 +9,7 @@ let dim = 1000, // dimensions
   centerY = dim / 2,
   bg = 0, // backgroundColor: 0 to 1(greyscale)
   color = 1, // color of the point: 0 to 1(greyscale)
-  speed = 0.01, // Angle Step in radians
+  speed = 0.001, // Angle Step in radians
   doRender = false,
   rendersPerFrame = 20,
   pi = Math.PI,
@@ -29,14 +29,27 @@ let clistnegative = [
   new Complex(1.2, pi/2),
   new Complex(2.0, pi/2),
   new Complex(1.0, pi/2),
+  new Complex(1.0, pi/2),
+  new Complex(1.0, pi/2),
+  new Complex(1.0, pi/2),
+  new Complex(1.0, pi/2),
+  new Complex(1.0, pi/2),
+  new Complex(1.0, pi/2),
+  new Complex(1.0, pi/2),
   new Complex(2.1, pi/2),
   new Complex(1.1, pi/2)
 ]
 
 // complex nos 1with non-negative time periods(anti-clockwise) staring with 0, 1, 2...
 let clist = [
-  new Complex(2, -pi/2),
+  new Complex(12, -pi/2),
   new Complex(7, pi/2),
+  new Complex(0.5, pi/2),
+  new Complex(0.5, pi/2),
+  new Complex(0.5, pi/2),
+  new Complex(0.5, pi/2),
+  new Complex(0.5, pi/2),
+  new Complex(0.5, pi/2),
   new Complex(0.5, pi/2),
   new Complex(0.5, pi/2),
   new Complex(0.3, pi/2),
