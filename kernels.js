@@ -11,7 +11,7 @@ const render = gpu.createKernel(function (finalComplex, pixels, coordScaleFactor
   {
     output: [dim, dim],
     pipeline: true,
-    constants: {dim, centerX, centerY, color}
+    constants: {centerX, centerY, color}
   }
 )
 
