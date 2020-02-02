@@ -9,3 +9,22 @@
   border-style: double;
   font-size: small;
 }
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 50%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+canvas {
+  margin-left: auto;
+}
+
+button {
+  border-radius: 0;
+}
