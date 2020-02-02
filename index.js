@@ -3,6 +3,13 @@ const scaleCoords = coord => Math.floor(coord * coordScaleFactor) / coordScaleFa
 let renders = 0; // renders countc
 let frames = 0; // frame count
 let renderPixelsTex = blankGraph(); // initial black graph rendered pixels texture
+let lastBlank;
+
+const deleteTexture = (texture) => {
+  if (texture && texture.delete) {
+    texture.delete();
+  }
+}
 
 const doDraw = () => {
   if(doRender) {
@@ -25,7 +32,9 @@ const doDraw = () => {
 
       renders++; // count the rendered frame
 
-      renderPixelsTex = render([res.x, res.y], getTex(renderPixelsTex), coordScaleFactor, pointSize);
+      renderPixelsTex = render([res.x, res.y], lastBlank = getTex(renderPixelsTex), coordScaleFactor, pointSize);
+      deleteTexture(lastBlank); // Cleanup
+      deleteTexture(renderPixelsTex); // Cleanup
 
       clist.forEach((c, i) => c.multiply(new Complex(1, i * speed))) // next rotation step
       clistnegative.forEach((c, i) => c.multiply(new Complex(1, -(i + 1) * speed)))
@@ -84,10 +93,7 @@ setInterval(() => {
   document.getElementById('frames').innerHTML = `
   ${renders} renders per second <br>
   ${frames} fps <br>
-  speed/step per render: ${speed} <br>
-  rendersPerFrame: ${rendersPerFrame} <br>
   dimensions: ${dim} x ${dim} <br>
-  coordScaleFactor: ${coordScaleFactor} <br>
   pointSize: ${pointSize} <br>
   AntiClockwise Nos: ${clist.length - 1} <br>
   Clockwise Nos: ${clistnegative.length}
