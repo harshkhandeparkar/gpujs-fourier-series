@@ -3,30 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Complex Nos</title>
-  <link rel="stylesheet" href="index.css">
+  <title>GPUjs Fourier Series</title>
+  <link rel="stylesheet" href="index.css" />
 </head>
 <body>
-  
-  <canvas id="main-canvas"></canvas>
-  <h1 id="frames"></h1>
+  <div class="container">
+    <ul class="examples">
+      <li class="example">
+        <h3># Random Symmetric Fourier Series</h3>
+        <p class="desc">
+          Plot the sum of a randomly generated (symmetric) fourier series (10 numbers) using the RealComplexSpace class which can track, plot and interpolate (make a line between)
+          complex numbers. This class also exports a util class named `Complex` for handling complex numbers.
+        </p>
+        <p>Made Using: <a href="https://github.com/HarshKhandeparkar/gpujs-real-renderer" class="class-name">GPUjs Real Renderer</a></p>
 
-  <form>
-    <label for="speed">Speed: </label><input type="text" id="speed" placeholder="Speed" /><br><br>
-    <label for="rend-per-frame">Renders Per Frame: </label><input type="number" id="rend-per-frame" placeholder="Renders Per Frame" /><br><br>
-    <label for="pt-size">Point Size: </label><input type="text" id="pt-size" placeholder="Point Size" /><br><br>
-    <label for="coord-scale-factor">Coordinate Scale Factor: </label><input type="text" id="coord-scale-factor" placeholder="Coordinate Scale Factor" /><br><br>
-    <button id="change">Change Input</button>
-    <button id="start-stop">Start</button>
-    <button id="restart">Restart</button>
-    <button id="blank">Blank Graph</button>
-  </form>
-  
+        <canvas id="complex-canvas"></canvas> <br />
+        <button id="complex-render">Start Rendering</button>
+        <button id="complex-randomize">Randomize</button>
+      </li>
+    </ol>
+  </div>
+
+  <hr />
+  <footer>
+    <a href="https://github.com/HarshKhandeparkar/gpujs-real-renderer">Github</a> |
+    <a href="https://github.com/HarshKhandeparkar/gpujs-real-renderer/releases/latest">Latest Release</a>
+  </footer>
+
   <script src="./gpu-browser.min.js"></script>
-  <script src="./complex.js"></script>
-  <script src="./inputs.js"></script>
-  <script src="./kernels.js"></script>
-  <script src="./index.js"></script>
+  <script src="./gpujs-real-renderer-browser.min.js"></script>
+
+  <script src="./example.js"></script>
 </body>
 </html>

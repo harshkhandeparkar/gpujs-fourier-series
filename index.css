@@ -1,30 +1,35 @@
-#frames {
-  position: fixed;
-  top: 0;
-  margin-top: 0;
-  right: 0;
-  background: white;
+footer {
+  text-align: center;
+}
+
+footer a {
+  text-decoration: none;
+}
+
+.container {
+  padding-right: 2rem;
+  padding-left: 2rem;
+}
+
+/* Examples */
+ul.examples {
+  list-style: none;
+}
+
+a.class-name {
   padding: 4px;
-  border-radius: 8px;
-  border-style: double;
-  font-size: small;
+  border-radius: 6px;
+  background-color: #333;
+  color: white;
 }
 
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 50%;
+a.class-name:hover {
+  color: #bbb;
 }
 
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-canvas {
-  margin-left: auto;
-}
-
-button {
-  border-radius: 0;
+.desc {
+  padding: 4px;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
 }
