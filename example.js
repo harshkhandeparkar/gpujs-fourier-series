@@ -12,7 +12,7 @@ const ComplexGraph = new GPUjsRealRenderer.RealComplexSpace({
   changeNumbers: (nums, time, timeStep) => {
     if (nums.find(num => num.name == 'final')) nums[nums.findIndex(num => num.name == 'final')].number = new Complex(0, 0);
 
-    for (let i = complexLimits[0]; i <= complexLimits[1]; i++) {
+    for (let i = window.complexLimits[0]; i <= window.complexLimits[1]; i++) {
       if (nums.find(num => num.name == i)) {
         const n = nums.find(num => num.name == i);
 
@@ -21,24 +21,24 @@ const ComplexGraph = new GPUjsRealRenderer.RealComplexSpace({
       }
     }
 
-    let partialSum = new Complex(0, 0);
-    for (let i = complexLimits[0]; i <= complexLimits[1]; i++) {
-      if (nums.find(num => num.name == i)) {
-        const newPartial = {
-          name: `p${i}`,
-          number: new Complex(partialSum.r, partialSum.theta),
-          show: true,
-          persistent: false,
-          interpolate: true,
-          interpolateTo: new Complex(partialSum.r, partialSum.theta).add(nums.find(num => num.name == i).number)
-        }
+    // let partialSum = new Complex(0, 0);
+    // for (let i = window.complexLimits[0]; i <= window.complexLimits[1]; i++) {
+    //   if (nums.find(num => num.name == i)) {
+    //     const newPartial = {
+    //       name: `p${i}`,
+    //       number: new Complex(partialSum.r, partialSum.theta),
+    //       show: true,
+    //       persistent: false,
+    //       interpolate: true,
+    //       interpolateTo: new Complex(partialSum.r, partialSum.theta).add(nums.find(num => num.name == i).number)
+    //     }
 
-        if (nums.find(num => num.name == `p${i}`)) nums[nums.findIndex(num => num.name == `p${i}`)] = newPartial;
-        else nums.push(newPartial);
+    //     if (nums.find(num => num.name == `p${i}`)) nums[nums.findIndex(num => num.name == `p${i}`)] = newPartial;
+    //     else nums.push(newPartial);
 
-        partialSum.add(nums.find(num => num.name == i).number);
-      }
-    }
+    //     partialSum.add(nums.find(num => num.name == i).number);
+    //   }
+    // }
     return nums;
   }
 })
